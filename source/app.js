@@ -1,5 +1,16 @@
 const express = require('express')
 const app = express()
+
+//configurar a conexão
+mongoose.connect("mongodb+srv://cintiacristinaangelo:<db_password>@cluster0.tekicd6.mongodb.net/")
+.then(() => {
+    console.log('Conectado')
+})
+.catch((error) => {
+    console.log(`Erro ao tentar conectar no mongo ${error}`)
+})
+
+
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
@@ -13,6 +24,7 @@ app.use(function (req, res, next){
 
 //criar rotas - OBS: vamos criar a rota
 const index = require("./routes/index")
+const { default: mongoose } = require('mongoose')
 
 app.use("/", index)
 

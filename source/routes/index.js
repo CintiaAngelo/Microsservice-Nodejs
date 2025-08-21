@@ -100,7 +100,7 @@ router.put('/:id', (req,res,next) => {
 });
 
 //criar o delete
-router.delte("/:id", (req,res,next) => {
+router.delete("/:id", (req,res,next) => {
     try{
         const id = parseInt(req.params.id)
         const userIndex = users.findIndex(u => u.id == id)
@@ -115,7 +115,13 @@ router.delte("/:id", (req,res,next) => {
         }
         //remover da lista
         const deleteUser = users[userIndex]
-        users.splice(deleteUser, 1) //removendo
+        console.log(`Remover usuario ${deleteUser}`)
+        users.splice(userIndex, 1) //removendo
+
+        res.status(204).json({
+            success:true,
+            message: "Usuario deletado"
+        })
 
     } catch(error){
         console.info(erro)
